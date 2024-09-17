@@ -47,8 +47,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 export default async function SinglePost({ params }: Props) {
   const data = await loader(params.slug);
+  console.log("AAAATEEEEEENCCCCCIOOOOOOOON")
+  console.log(data); // Agrega este log para verificar la respuesta de la API
   const post = data?.data[0];
   if (!post) return null;
+  console.log(post);
 
   return (
     <article>
@@ -56,7 +59,7 @@ export default async function SinglePost({ params }: Props) {
         <header className="container mx-auto my-10">
           <h1 className="text-6xl font-bold tracking-tighter sm:text-5xl mb-4">{post.title}</h1>
           <p className="text-muted-foreground">
-            Posted on {formatDate(post.publishedAt)} - {post.category.text}
+            Posted on {formatDate(post.publishedAt)} - {/* {post.category.text} */} {post.category ? ` - ${post.category.text}` : ''}
           </p>
           <StrapiImage
             src={post.image.url}
